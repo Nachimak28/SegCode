@@ -1,0 +1,31 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+#kernel 1
+image = cv2.imread('gt_alp_1.5_thm_3.png', 0)
+#kernel = np.ones((2,2))
+#kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2,2))
+#kernel = cv2.getStructuringElement(cv2.MORPH_CROSS,(2,2))
+
+erosion = cv2.erode(image, kernel, iterations = 1)
+dilation = cv2.dilate(image,kernel,iterations = 1)
+opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+plt.subplot(1,3,1)
+plt.title('Original')
+plt.imshow(image, cmap = 'gray')
+#plt.subplot(3,2,2)
+#plt.title('Erosion')
+#plt.imshow(erosion, cmap = 'gray')
+#plt.subplot(3,2,3)
+#plt.title('Dilation')
+#plt.imshow(dilation, cmap = 'gray')
+plt.subplot(1,3,2)
+plt.title('Opening')
+plt.imshow(opening, cmap = 'gray')
+plt.subplot(1,3,3)
+plt.title('Closing')
+plt.imshow(closing, cmap = 'gray')
+plt.tight_layout()
+plt.show()

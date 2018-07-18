@@ -35,7 +35,7 @@ parameterfile = {
 # Log-Gabor
 #'base_levels' : 2.,
 'base_levels' : 1.618,
-'n_theta' : 24, # number of (unoriented) angles between 0. radians (included) and np.pi radians (excluded)
+'n_theta' : 30, # number of (unoriented) angles between 0. radians (included) and np.pi radians (excluded)
 'B_sf' : .4, # 1.5 in Geisler
 'B_theta' : 3.14159/18.,
 # PATHS
@@ -91,11 +91,11 @@ T = S - alpha * sd
 print(T)
 
 #plt.plot(np.arange(img[150].size), img[150], "ro")
-
+n = 4
 cp = img.copy()
 for i in range(len(cp)):
     for j in range(len(cp[i])):
-        if cp[i][j] <= 2.5*T:
+        if cp[i][j] <= n*T:
             cp[i][j] = 255
 
 plt.title('Global Thresholding')
@@ -105,7 +105,8 @@ plt.imshow(img, cmap  = 'gray')
 plt.subplot(1,2,2)
 plt.title('Global Thresholding')
 plt.imshow(cp, cmap = 'gray')
-
+name = 'gt_alp_'+ str(alpha) + '_thm_' + str(n) + '.png'
+#cv2.imwrite(name, cp)
 plt.show()
 
 
